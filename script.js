@@ -43,7 +43,7 @@ class PixelBuffer {
     }
 }
 
-// Вспомогательная функция для рисования горизонтальной линии (используется в заливке)
+// Вспомогательная функция для рисования горизонтальной линии
 function drawHorizontalLine(buffer, x0, y, x1, color) {
     if (y < 0 || y >= buffer.height) return;
     let start = Math.min(x0, x1);
@@ -108,7 +108,7 @@ function fillCircleBresenham(buffer, xc, yc, r, color) {
 
 //Алгоритм Ву для окружности
 function drawCircleWu(buffer, xc, yc, r, color) {
-    // Основной цвет (без альфы, будем добавлять прозрачность)
+    // Основной цвет
     const baseR = color[0], baseG = color[1], baseB = color[2];
 
     for (let x = 0; x <= r; x++) {
@@ -132,9 +132,8 @@ function drawCircleWu(buffer, xc, yc, r, color) {
     }
 }
 
-/**
- * Вспомогательная функция для отрисовки 8 симметричных точек с заданной альфой (алгоритм Ву)
- */
+
+// Вспомогательная функция для отрисовки 8 симметричных точек с заданной альфой (алгоритм Ву)
 function put8Wu(buffer, xc, yc, dx, dy, r, g, b, alpha) {
     // (dx, dy)
     buffer.setPixel(xc + dx, yc + dy, r, g, b, alpha);
@@ -209,18 +208,18 @@ function drawAllCircles() {
     });
 }
 
-// ---------- Тест производительности (1000 окружностей каждым методом) ----------
+// Тест производительности
 function runPerformanceTest() {
     const perfDiv = document.getElementById('perfDisplay');
     perfDiv.innerHTML = 'Выполняется замер...';
 
-    // Создаём небольшой буфер 200x200 для тестов (можно не выводить на экран)
+    // Создаём небольшой буфер 200x200 для тестов
     const testBuffer = new PixelBuffer(200, 200);
     const radius = 50;
     const cx = 100, cy = 100;
     const iterations = 1000;
 
-    // Тест Брезенхема (контур)
+    // Тест Брезенхема
     let start = performance.now();
     for (let i = 0; i < iterations; i++) {
         drawCircleBresenham(testBuffer, cx, cy, radius, [255, 0, 0, 255]);
@@ -241,7 +240,7 @@ function runPerformanceTest() {
     }
     let timeWu = performance.now() - start;
 
-    // Тест встроенного arc (рисуем прямо в контекст, но чтобы не загромождать, используем offscreen canvas)
+    // Тест встроенного arc
     const offCanvas = document.createElement('canvas');
     offCanvas.width = 200;
     offCanvas.height = 200;
@@ -264,7 +263,7 @@ function runPerformanceTest() {
             `;
 }
 
-// ---------- Инициализация и обработчики кнопок ----------
+// Инициализация и обработчики кнопок
 document.getElementById('perfBtn').addEventListener('click', () => {
     runPerformanceTest();
 });
