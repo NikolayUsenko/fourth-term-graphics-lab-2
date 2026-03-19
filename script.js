@@ -36,9 +36,9 @@ function setActiveMode(activeMode) {
 // Обновление статусного сообщения
 function updateStatus() {
     if (points.length === maxPoints) {
-        statusMessage.textContent = `✅ Набрано ${maxPoints} точек. Кривая нарисована!`;
+        statusMessage.textContent = `Набрано ${maxPoints} точек. Кривая нарисована!`;
     } else {
-        statusMessage.textContent = `👉 Добавьте еще ${maxPoints - points.length} точек`;
+        statusMessage.textContent = `Добавьте еще ${maxPoints - points.length} точек`;
     }
 }
 
@@ -122,7 +122,7 @@ canvas.addEventListener('click', (e) => {
     
     // Если уже достигнут лимит - не добавляем
     if (points.length >= maxPoints) {
-        statusMessage.textContent = `⚠️ Уже есть ${maxPoints} точек. Нажмите "Очистить" или смените режим`;
+        statusMessage.textContent = `Уже есть ${maxPoints} точек. Нажмите "Очистить" или смените режим`;
         return;
     }
     
